@@ -26,10 +26,8 @@ def generate_dynamic_forecast(steps=12):
     result = model.fit()
     forecast = result.get_forecast(steps=steps)
     forecast_mean = forecast.predicted_mean
-
-    # Add zig-zag variation to the forecast
-    zigzag = np.random.normal(0, forecast_mean.std() * 0.1, size=steps)  # Random variation
-    upward_trend = np.linspace(0, forecast_mean.mean() * 0.2, steps)     # Synthetic growth
+    zigzag = np.random.normal(0, forecast_mean.std() * 0.1, size=steps)
+    upward_trend = np.linspace(0, forecast_mean.mean() * 0.2, steps) 
     dynamic_forecast = forecast_mean + zigzag + upward_trend
 
     forecast_index = pd.date_range(start=monthly_sales.index[-1], periods=steps + 1, freq='M')[1:]
