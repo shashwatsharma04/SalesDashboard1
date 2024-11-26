@@ -20,7 +20,7 @@ df.set_index('Date', inplace=True)
 # Aggregate sales data monthly
 monthly_sales = df['Total'].resample('M').sum()
 
-# Generate Forecast with Zig-Zag Pattern
+# Generate Forecast
 def generate_dynamic_forecast(steps=12):
     model = ARIMA(monthly_sales, order=(1, 1, 1))
     result = model.fit()
